@@ -7,6 +7,17 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 
+import org.apache.http.HttpEntity;
+import org.apache.http.HttpResponse;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpPost;
+import org.apache.http.entity.ContentType;
+import org.apache.http.entity.mime.HttpMultipartMode;
+import org.apache.http.entity.mime.MIME;
+import org.apache.http.entity.mime.MultipartEntityBuilder;
+import org.apache.http.entity.mime.content.FileBody;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.apache.http.params.CoreProtocolPNames;
 import org.json.JSONObject;
 
 import java.io.BufferedReader;
@@ -145,9 +156,7 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
                 String password_inputed = password;
                 //now login the person
 
-                LoginHelper loginHelper = new LoginHelper();
 
-                loginHelper.loginUser(email_inputed,password_inputed, activity );
 
 
             }

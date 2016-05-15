@@ -4,34 +4,21 @@
     api-level="23"
     density="xxxhdpi"
     format="7"
-    timestamp="27286437476373" >
+    timestamp="31415550899846" >
 
     <task
         name="javac"
-        duration="378" />
+        duration="351" />
     <task
         name="instant-run-dex"
         duration="0" />
     <task
         name="instant-run-transform"
-        duration="0" />
+        duration="17" />
     <task
         name="verifier"
-        duration="0" />
+        duration="3" />
 
-    <artifact
-        location="/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/resources-debug.ap_"
-        type="RESOURCES" />
-
-    <build timestamp="27115733435703" >
-        <artifact
-            location="/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/outputs/apk/app-debug.apk"
-            type="MAIN" />
-    </build>
-    <build timestamp="27286437476373" >
-        <artifact
-            location="/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/resources-debug.ap_"
-            type="RESOURCES" />
-    </build>
+    <build timestamp="31415550899846" />
 
 </instant-run>
