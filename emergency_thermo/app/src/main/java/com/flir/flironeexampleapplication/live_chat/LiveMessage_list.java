@@ -13,6 +13,7 @@ public class LiveMessage_list {
     private int mType;
     private String mMessage;
     private String mUsername;
+    private String image_uri;
 
     private LiveMessage_list() {}
 
@@ -28,11 +29,15 @@ public class LiveMessage_list {
         return mUsername;
     };
 
+    public String getImage_uri(){return image_uri;};
+
+
 
     public static class Builder {
         private final int mType;
         private String mUsername;
         private String mMessage;
+        private String mimage_uri;
 
         public Builder(int type) {
             mType = type;
@@ -48,11 +53,20 @@ public class LiveMessage_list {
             return this;
         }
 
+        public Builder image_uri(String image_uri){
+
+            mimage_uri = image_uri;
+
+            return this;
+
+        }
+
         public LiveMessage_list build() {
             LiveMessage_list message = new LiveMessage_list();
             message.mType = mType;
             message.mUsername = mUsername;
             message.mMessage = mMessage;
+            message.image_uri= mimage_uri;
             return message;
         }
     }

@@ -270,7 +270,7 @@ public class LiveChat_frag extends Fragment
 
     private void addMessage(String username, String message) {
         mMessages.add(new LiveMessage_list.Builder(LiveMessage_list.TYPE_MESSAGE)
-                .username(username).message(message).build());
+                .username(username).message(message).image_uri(photo_uri_string).build());
         mAdapter.notifyItemInserted(mMessages.size() - 1);
         scrollToBottom();
     }

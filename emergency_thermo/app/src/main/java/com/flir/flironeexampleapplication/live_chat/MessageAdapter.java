@@ -1,10 +1,12 @@
 package com.flir.flironeexampleapplication.live_chat;
 
 import android.content.Context;
+import android.graphics.BitmapFactory;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.flir.flironeexampleapplication.R;
@@ -47,8 +49,10 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
     @Override
     public void onBindViewHolder(ViewHolder viewHolder, int position) {
         LiveMessage_list message = mMessages.get(position);
+
         viewHolder.setMessage(message.getMessage());
         viewHolder.setUsername(message.getUsername());
+        viewHolder.setChat_image(message.getImage_uri());
     }
 
     @Override
@@ -64,12 +68,15 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
     public class ViewHolder extends RecyclerView.ViewHolder {
         private TextView mUsernameView;
         private TextView mMessageView;
+        private ImageView chat_image;
 
         public ViewHolder(View itemView) {
             super(itemView);
 
             mUsernameView = (TextView) itemView.findViewById(R.id.username);
             mMessageView = (TextView) itemView.findViewById(R.id.message);
+            chat_image = (ImageView) itemView.findViewById(R.id.chat_image);
+
         }
 
         public void setUsername(String username) {
@@ -81,6 +88,14 @@ public class MessageAdapter  extends RecyclerView.Adapter<MessageAdapter.ViewHol
         public void setMessage(String message) {
             if (null == mMessageView) return;
             mMessageView.setText(message);
+        }
+        public void setChat_image(String image_uri){
+            if(image_uri==null){
+                return ;
+            }
+           // chat_image.setImageBitmap();
+            chat_image.setImageBitmap(BitmapFactory.decodeFile(image_uri));
+
         }
 
         private int getUsernameColor(String username) {

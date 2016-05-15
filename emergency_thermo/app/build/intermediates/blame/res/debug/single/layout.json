@@ -24,16 +24,16 @@
         "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_activity_chooser_view.xml"
     },
     {
-        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
-        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_bar_up_container.xml"
+        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
+        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
     },
     {
         "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/notification_media_action.xml",
         "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_media_action.xml"
     },
     {
-        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/notification_template_part_chronometer.xml",
-        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/notification_template_part_chronometer.xml"
+        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/abc_action_bar_up_container.xml",
+        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/com.android.support/appcompat-v7/23.1.1/res/layout/abc_action_bar_up_container.xml"
     },
     {
         "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/layout/abc_search_dropdown_item_icons_2line.xml",
