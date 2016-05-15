@@ -1,0 +1,10 @@
+[
+    {
+        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/raw/sampleframes.zip",
+        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/src/main/res/raw/sampleframes.zip"
+    },
+    {
+        "merged": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/res/merged/debug/raw/default_camera_files.zip",
+        "source": "/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/exploded-aar/flironesdk/res/raw/default_camera_files.zip"
+    }
+]
