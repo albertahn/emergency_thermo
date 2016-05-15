@@ -3,6 +3,7 @@ package com.flir.flironeexampleapplication.live_chat;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.v4.app.Fragment;
@@ -17,12 +18,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.inputmethod.EditorInfo;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.flir.flironeexampleapplication.util.Send_to_server;
 import com.github.nkzawa.emitter.Emitter;
 import com.github.nkzawa.socketio.client.IO;
 import com.github.nkzawa.socketio.client.Socket;
@@ -45,7 +48,10 @@ public class LiveChat_frag extends Fragment
     {
 
        public String imagePath;
-
+        public TextView photo_uri;
+        String photo_uri_string;
+        public View rootView;
+        public CheckBox image_check;
         private static final int REQUEST_LOGIN = 0;
 
         private static final int TYPING_TIMER_LENGTH = 600;
@@ -119,10 +125,20 @@ public class LiveChat_frag extends Fragment
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                                  Bundle savedInstanceState) {
 
-            View rootView = inflater.inflate(R.layout.livechat_frag_____fragment_main, container, false); //inflater.inflate(R.layout.guide_frag, container, false);
+             rootView = inflater.inflate(R.layout.livechat_frag_____fragment_main, container, false); //inflater.inflate(R.layout.guide_frag, container, false);
+//from getting pic
 
             Intent intent = getActivity().getIntent();
             imagePath = intent.getStringExtra("imagepath");
+
+
+            image_check = (CheckBox) rootView.findViewById(R.id.image_checked);
+
+            photo_uri = (TextView) rootView.findViewById(R.id.photo_uri);
+            photo_uri.setText(imagePath);
+
+            photo_uri_string = (String) photo_uri.getText();
+
             ImageButton imageView = (ImageButton) rootView.findViewById(R.id.send_image);
             imageView.setImageBitmap(BitmapFactory.decodeFile(imagePath));
 
@@ -165,12 +181,15 @@ public class LiveChat_frag extends Fragment
         mMessagesView.setLayoutManager(new LinearLayoutManager(getActivity()));
         mMessagesView.setAdapter(mAdapter);
 
+
+
         mInputMessageView = (EditText) view.findViewById(R.id.message_input);
         mInputMessageView.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
             public boolean onEditorAction(TextView v, int id, KeyEvent event) {
                 if (id == R.id.send || id == EditorInfo.IME_NULL) {
-                    attemptSend();
+         //send image
+                    attemptSend(photo_uri_string, image_check);
                     return true;
                 }
                 return false;
@@ -205,49 +224,39 @@ public class LiveChat_frag extends Fragment
                 @Override
                 public void onClick(View v) {
 
-                    attemptSend();
+
+
+                    photo_uri = (TextView) rootView.findViewById(R.id.photo_uri);
+                    photo_uri_string = ""+ photo_uri.getText();
+
+                    Toast tt = Toast.makeText(getActivity(), "ur:"+ photo_uri_string, Toast.LENGTH_SHORT);
+                    tt.show();
+
+                   Send_to_server sendserver = new Send_to_server(photo_uri_string, getActivity());
+
+                    sendserver.execute();
+
+                    AsyncTask.Status stat =  sendserver.getStatus();
+
+                    Log.e("fuck", ""+sendserver.getStatus());
+
+                    if(sendserver.getStatus().equals(AsyncTask.Status.RUNNING)){
+
+                        Toast.makeText(getContext(), "finisehdd async", Toast.LENGTH_SHORT).show();
+
+                        attemptSend(photo_uri_string, image_check);
+                    }
+
+                   // attemptSend(photo_uri_string, image_check);
+
+
             }
         });
-    }
 
-      /*  @Override
-        public void onActivityResult(int requestCode, int resultCode, Intent data) {
-            super.onActivityResult(requestCode, resultCode, data);
-        if (Activity.RESULT_OK != resultCode) {
-            getActivity().finish();
-            return;
-        }
 
-        mUsername = data.getStringExtra("username");
-        int numUsers = data.getIntExtra("numUsers", 1);
+    }//oncreate
 
-        addLog(getResources().getString(R.string.message_welcome));
-        addParticipantsLog(numUsers);
-    }*/
 
-       /* @Override
-        public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        // Inflate the menu; this adds items to the action bar if it is present.
-        inflater.inflate(R.menu.menu_main, menu);
-    }*/
-        /*
-
-        @Override
-        public boolean onOptionsItemSelected(MenuItem item) {
-        // Handle action bar item clicks here. The action bar will
-        // automatically handle clicks on the Home/Up button, so long
-        // as you specify a parent activity in AndroidManifest.xml.
-        int id = item.getItemId();
-
-        //noinspection SimplifiableIfStatement
-        if (id == R.id.action_leave) {
-            leave();
-            return true;
-        }
-
-        return super.onOptionsItemSelected(item);
-    }
-*/
     private void addLog(String message) {
         mMessages.add(new LiveMessage_list.Builder(LiveMessage_list.TYPE_LOG)
                 .message(message).build());
@@ -285,8 +294,7 @@ public class LiveChat_frag extends Fragment
         }
     }
 //send message
-    private void attemptSend() {
-
+    public void attemptSend(String image_uri, CheckBox check_image) {
 
 
         if (null == mUsername) return;
@@ -308,20 +316,29 @@ public class LiveChat_frag extends Fragment
         // perform the sending message attempt.
       //  String json = "{\"message\":\""+message+ "\", \"image\" : \"http://tanggoal.com/public/uploads/members_pic/14317887721427390234IMG_20131202_204726.jpg\"}";
 
+        //TextView imageurl = (TextView)
+
         try {
 
             JSONObject jObjectType = new JSONObject();
 
             jObjectType.put("message", message);
-            jObjectType.put("image", "http://tanggoal.com/public/uploads/members_pic/14317887721427390234IMG_20131202_204726.jpg");
+
+            String[] imageAr = image_uri.split("/");
+
+            jObjectType.put("image", "http://tanggoal.com/public/uploads/hackathon/"+imageAr[imageAr.length-1]);
+
+            Toast ta= Toast.makeText(getContext(), "arr: "+imageAr[imageAr.length-1], Toast.LENGTH_SHORT);
+            ta.show();
 
             mSocket.emit("new message", jObjectType);
+
 
 
         }catch (JSONException e){
 
             Log.e("json:",""+e );
-        }
+        }//end json
     }
 
     private void startSignIn() {

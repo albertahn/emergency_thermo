@@ -4,8 +4,10 @@ import android.app.Activity;
 import android.os.AsyncTask;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.CheckBox;
 import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
+import android.widget.Toast;
 
 import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
@@ -25,6 +27,8 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import com.flir.flironeexampleapplication.R;
+import com.flir.flironeexampleapplication.live_chat.LiveChat_frag;
+import com.github.nkzawa.socketio.client.Socket;
 
 /**
  * Created by albertan on 5/14/16.
@@ -33,35 +37,21 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
 
     Activity activity;
     View rootView;
-    String username, email, password, pro_pic_url;
+    String  pro_pic_url;
+    private Socket mSocket;
 
 
 
-    public Send_to_server(String username,
-                        String email,
-                        String password,
-                        String pro_pic_url,
-                        Activity activity){
+    public Send_to_server(String pro_pic_url,  Activity activity){
 
-        this.username = username;
-        this.email = email;
         this.activity = activity;
-        this.password = password;
+
         this.pro_pic_url = pro_pic_url;
 
         rootView = ((Activity) activity).getWindow().getDecorView().findViewById(android.R.id.content);
 
-        /*ViewGroup reg_scrollview = (ViewGroup)  rootView.findViewById(R.id.reg_scrollview);
-        reg_scrollview.removeAllViewsInLayout();
-
-        ProgressBar progressBar = new  ProgressBar(activity);
-        progressBar.setVisibility(View.VISIBLE);
-
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(100,100);
-        params.addRule(RelativeLayout.CENTER_IN_PARENT);
-        reg_scrollview.addView(progressBar,params);*/
-
-        //reg_scrollview.addView(progressBar);
+       Toast tt = Toast.makeText(activity, "uri : "+pro_pic_url, Toast.LENGTH_SHORT);
+        tt.show();
 
     }
 
@@ -84,17 +74,17 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
 
             }
 
-            builder.addTextBody("username", username, ContentType.create("text/plain", MIME.UTF8_CHARSET));
-            builder.addTextBody("email", email, ContentType.create("text/plain", MIME.UTF8_CHARSET));
-            builder.addTextBody("password",  password, ContentType.create("text/plain", MIME.UTF8_CHARSET));
-
+          /*  builder.addTextBody("username", "username", ContentType.create("text/plain", MIME.UTF8_CHARSET));
+            builder.addTextBody("email", "email", ContentType.create("text/plain", MIME.UTF8_CHARSET));
+            builder.addTextBody("password",  "password", ContentType.create("text/plain", MIME.UTF8_CHARSET));
+*/
 
             HttpClient httpClient = new DefaultHttpClient();
 
             httpClient.getParams().setParameter(CoreProtocolPNames.USER_AGENT,
                     System.getProperty("http.agent"));
 
-            HttpPost httpPost = new HttpPost("http://mobile.tanggoal.com/register/reg");
+            HttpPost httpPost = new HttpPost("http://tanggoal.com/hack/flir");
 
             httpPost.setEntity( builder.build());
 
@@ -136,6 +126,20 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
     protected void onPostExecute(String result){
 
         super.onPostExecute(result);
+
+
+
+
+      /*  LiveChat_frag live = new LiveChat_frag();
+
+        CheckBox checkBox = (CheckBox) rootView.findViewById(R.id.image_checked);
+
+        live.attemptSend(pro_pic_url, checkBox);*/
+
+
+        Toast t= Toast.makeText(activity, "onpost finish "+result, Toast.LENGTH_SHORT);
+        t.show();
+
         try {
 
             JSONObject json = new JSONObject(result);
@@ -152,12 +156,6 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
                 d.setContentView(t);
                 d.show();*/
 
-                String email_inputed = json.get("email").toString();
-                String password_inputed = password;
-                //now login the person
-
-
-
 
             }
 
@@ -171,6 +169,12 @@ public class Send_to_server  extends AsyncTask<String, Integer, String> {
             // TODO Auto-generated catch block
             e.printStackTrace();
         }
+    }//excetue
+
+    public boolean success(){
+
+
+        return true;
     }
 
 

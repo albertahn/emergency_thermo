@@ -1,2 +1,0 @@
-CHANGED,/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/flir/flironeexampleapplication/util/Send_to_server$override.class
-CHANGED,/Users/albertan/Documents/career/hackathon/flir_thermal/FLIROneSDKBundle/FLIRONEExampleApplication/app/build/intermediates/transforms/instantRun/debug/folders/4000/5/enhanced/com/android/tools/fd/runtime/AppPatchesLoaderImpl.class
